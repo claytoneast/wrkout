@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon app.js",
-    "debug": "node-debug -b=0 -cli --no-preload app.js"
+    "debug": "node-debug -b=0 -cli --no-preload app.js",
+    "clean": "mongo wrkoutDev --eval 'db.dropDatabase();'"
   },
   "author": "",
   "license": "ISC",

@@ -6,14 +6,18 @@
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
-    <form method="POST" action="/workout">
-      <input type="number" name="number" value="" placeholder="Phone Number">
-      <br>
-      <input type="number" name="maxPushups" placeholder="20">
-      <br>
-      <input type="text" name="timeOfWorkout" placeholder="Time of Day">
-      <br>
-      <button type="submit">WRKOUT!</button>
-    </form>
+    <div class="container">
+        <form method="POST" action="/workout">
+          <div class="form-container">
+            <input type="text" name="phone" value="" placeholder="Phone Number">
+            <br>
+            <input type="number" name="maxPushups" placeholder="20" min="1" max="150">
+            <br>
+            <input type="time" name="timeOfWorkout" placeholder="Time of Day">
+            <br>
+            <button type="submit">WRKOUT!</button>
+          </div>
+        </form>
+    </div>
   </body>
 </html>
