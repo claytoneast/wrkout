@@ -8,14 +8,15 @@ sass --watch app/assets/styles:app/public
 
 near term:
 
-basic styling
+basic styling  
 custom time picker
-client & serverside form validations w/ visible err handling (numbers, are they real, reasonable pushups range, etc.)
-phone number validator
+client & serverside form validations w/ visible err handling (numbers -- are they real, reasonable pushups range, etc.)
+phone number validator  
+confirmation text message  
 
-longterm:
-tests LOL JK
+longterm:  
+Unit & integration testing  
+billing  
 
-I have no test number to receive on besides my own. so i'll receive at mine.
-create a test button maybe, that fills in the field with my number, pushups, the current time plus like, 1 minute.
-need to schedule the stuff right away then...
+create a test button that fills in the field with my number, pushups, the current time plus 1 minute.
+tests will go to my number for now. 
