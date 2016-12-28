@@ -4,5 +4,8 @@
     "plugins": [
         "standard",
         "promise"
-    ]
+    ],
+    "parserOptions": {
+      "emcaVersion": 6
+    }
 }
