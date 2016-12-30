@@ -2,7 +2,9 @@
 
 
 watch command:
-sass --watch app/assets/styles:app/public
+sass --watch app/assets/styles:app/public  
+
+must run on node 6.3.x for the debug script to run properly.
 
 ###### todo
 
@@ -19,4 +21,4 @@ Unit & integration testing
 billing  
 
 create a test button that fills in the field with my number, pushups, the current time plus 1 minute.
-tests will go to my number for now. 
+tests will go to my number for now.
