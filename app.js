@@ -31,37 +31,41 @@ app.post('/workout', (req, res) => {
   })
   newUser.save(function (err, savedUser) {
     if (err) return console.error(err)
-    scheduleUserTexts(savedUser)
+    scheduleSingleUserWorkouts(savedUser)
   })
   res.send('nice you made it')
 })
 
-let scheduleUserTexts = (user) => {
-  // let max = user.maxPushups
+let scheduleAllUserWorkouts = () => {
+  schedule.scheduleJob('0 3 * * *', function () { // set all
+    console.log('scheduling all user events now')
+    User.find({}, function (err, users) {
+      if (err) return console.log(err)
+      for (let user of users) {
+        console.log('stuff')
+        scheduleSingleUserWorkouts(user)
+      }
+    })
+  })
+}
+
+scheduleAllUserWorkouts()
+
+let scheduleSingleUserWorkouts = (user) => {
+  let max = user.maxPushups
   // let timeOfWorkout = user.timeOfWorkout
-  // let sets = []
-  // sets[0] = Math.floor(0.4 * max)
-  // sets[1] = Math.floor(0.5 * max)
-  // sets[2] = Math.floor(0.5 * max)
-  // sets[3] = Math.floor(0.5 * max)
-  // sets[4] = Math.floor(0.5 * max)
-  // sets[5] = Math.floor(0.33 * max)
-  // workoutParams.minute = parseInt((timeOfWorkout[3] + timeOfWorkout[4]), 10) // get last two digits of the time picker-returned time, aka minutes
-  // workoutParams.hour = parseInt((timeOfWorkout[0] + timeOfWorkout[1]), 10) // get first two digits of the time picker-returned time, aka hours
+  let sets = [Math.floor(0.4 * max),
+    Math.floor(0.5 * max),
+    Math.floor(0.5 * max),
+    Math.floor(0.5 * max),
+    Math.floor(0.5 * max),
+    Math.floor(0.33 * max)]
   let dateNow = new Date(Date.now())
   for (let i = 0; i < 6; i++) {
-    let workoutParams = []
-    let nextMinute = dateNow.getMinutes() + 1 + (2 * i) // minutes plus a 2 min offset for each item
-    workoutParams.push(nextMinute)
-    workoutParams.push(dateNow.getHours())
-    workoutParams.push(dateNow.getDate())
-    workoutParams.push(dateNow.getMonth() + 1)
-    workoutParams.push('*')
-    let cronDate = workoutParams.join(' ')
-    console.log('=========== workoutParams ===========', JSON.stringify(workoutParams, null, 4))
-    console.log('=========== cronDate ===========', JSON.stringify(cronDate, null, 4))
-    let job = schedule.scheduleJob(cronDate, function () {
-      console.log('event occuring')
+    let workoutTimeInCron = getTestEventDates(dateNow, i)
+    schedule.scheduleJob(workoutTimeInCron, function () {
+      console.log('=========== i ===========', JSON.stringify(i, null, 4))
+      console.log('=========== sets[i] ===========', JSON.stringify(sets[i], null, 4))
     })
   }
   // *    *    *    *    *    *
@@ -73,4 +77,34 @@ let scheduleUserTexts = (user) => {
   // │    │    └─────────────── hour (0 - 23)
   // │    └──────────────────── minute (0 - 59)
   // └───────────────────────── second (OPTIONAL)
+}
+
+// let getEventDates = (dateNow, workoutSetsIncrement) => {
+  // let workoutParams = []
+  // let nextMinute = dateNow.getMinutes() + 1 + (2 * workoutSetsIncrement) // minutes plus a 2 min offset for each item
+  // workoutParams.push(nextMinute)
+  // workoutParams.push(dateNow.getHours())
+  // workoutParams.push(dateNow.getDate())
+  // workoutParams.push(dateNow.getMonth() + 1)
+  // workoutParams.push('*')
+  // let cronDate = workoutParams.join(' ')
+  // console.log('=========== workoutParams ===========', JSON.stringify(workoutParams, null, 4))
+  // console.log('=========== cronDate ===========', JSON.stringify(cronDate, null, 4))
+  // return cronDate
+// }
+
+let getTestEventDates = (dateNow, workoutSetsIncrement) => {
+  let workoutParams = []
+  let nextSecond = dateNow.getSeconds() + (1 * workoutSetsIncrement)
+  workoutParams.push(nextSecond)
+  let nextMinute = dateNow.getMinutes() // minutes plus a 2 min offset for each item
+  workoutParams.push(nextMinute)
+  workoutParams.push(dateNow.getHours())
+  workoutParams.push(dateNow.getDate())
+  workoutParams.push(dateNow.getMonth() + 1)
+  workoutParams.push('*')
+  let cronDate = workoutParams.join(' ')
+  console.log('=========== workoutParams ===========', JSON.stringify(workoutParams, null, 4))
+  console.log('=========== cronDate ===========', JSON.stringify(cronDate, null, 4))
+  return cronDate
 }
