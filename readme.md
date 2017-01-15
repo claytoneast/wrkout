@@ -7,11 +7,15 @@ sass --watch app/assets/styles:app/public
 
 near term (in order):
 
-add .env for mongo url, twilio vars, etc  
+DONE add .env for mongo url, twilio vars, etc  
+DONE integrate Twilio api to send messages  
 add unit testing ONLY where it can speed up dev process  
-create a test button that fills in the field with my number, pushups, the current time plus 1 minute for current testing purposes. tests will go to my number for now.  
-integrate Twilio api to send messages  
-basic styling  
+  - Need to test limits of node-schedule, if I can get to 100 concurrent users, good. otherwise, need to implement job queue immediately.
+  - write quick twilio function test
+
+factor out twilio stuff
+
+NOPE basic styling  
 
 midterm:  
 full unit & integration testing  
