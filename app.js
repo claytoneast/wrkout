@@ -6,6 +6,7 @@ const bodyParser = require('body-parser')
 const sms = require('./app/routes/sms')
 const user = require('./app/routes/user')
 const mongoose = require('mongoose')
+const schedule = require('./app/core/schedule')
 mongoose.connect('mongodb://localhost/wrkoutDev')
 
 app.use('users', user)
@@ -23,6 +24,8 @@ app.listen(3000, function () {
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'app/views/index.html'))
 })
+
+schedule()
 
 //
 // let scheduleAllUserWorkouts = () => {
