@@ -12,9 +12,18 @@
   align-items: center;
   align-content: center;
   justify-content: center;
-  height: 150px;
+  // height: 150px;
 }
 
 input {
   width: 100%;
+  max-width: 80vw;
+  padding: 5px 0px;
+  border: 2px solid;
+}
+
+button[type=submit] {
+  height: 30px;
+  width: 80vw;
+  border: 2px solid;
 }
