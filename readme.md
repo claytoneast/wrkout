@@ -5,6 +5,8 @@ sass --watch app/assets/styles/styles.scss:app/public/styles.css
 
 node-schedule can run 60k jobs, at rate of 100/sec, without losing one. Seems like it'll do the job for now. Especially given that I'll be running everything at 3 specific times, and that's it. It'll only need to handle those times.
 
+ngrok http -subdomain=wrkout 3000  
+
 ###### todo
 
 &nbsp;  
@@ -19,8 +21,8 @@ near term (in order):
   - FUCK THIS style a workable homepage   
   - FUCK THIS Get users to signup and confirm their identity with confirmation code
   - FUCK THIS factor out Twilio stuff to it's own module
-  - Swap to a once-a-day sending system. Ignore the time zones utterly, PST rules for now. Will have to set Heroku time to PST and keep it there.
-  - All people can send one valid invite code to one other person. Then they are in competition with that person. Once a week, stats are tallied and sent to the two of them. Oh shit that'll be an interesting algorithm problem probably. Like how many handshakes occur in a room of 50 people... So everyone has two competitors: who invited them, and who they invited. That's fun. I like this game.  
+  - DONE Swap to a once-a-day sending system. Ignore the time zones utterly, PST rules for now. Will have to set Heroku time to PST and keep it there.
+  - FUCK THIS All people can send one valid invite code to one other person. Then they are in competition with that person. Once a week, stats are tallied and sent to the two of them. Oh shit that'll be an interesting algorithm problem probably. Like how many handshakes occur in a room of 50 people... So everyone has two competitors: who invited them, and who they invited. That's fun. I like this game.  
 
 midterm:  
   * full unit & integration testing FUCK THIS, NOPE going with a minimalist testing approach, do only integration testing. Test integrally on user actions, unit test MAYBE, if it will save much time over and provide more info than integration testing, or in case a module breaks frequently. If a module is breaking frequently and needs unit tests, it probably needs to be more simple...  

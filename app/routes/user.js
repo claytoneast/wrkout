@@ -1,9 +1,9 @@
 const User = require('../models/user')
+const express = require('express')
+const router = express.Router()
 
-let express = require('express')
-let router = express.Router()
-
-router.post('/users/create', (req, res) => {
+// define the about route
+router.post('/', function (req, res) {
   console.log(req.body)
   let newUser = new User({
     phone: req.body.phone,

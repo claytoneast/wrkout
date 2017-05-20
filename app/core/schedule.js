@@ -1,3 +1,13 @@
+// CRON FORMAT FOR EASY REF
+// ┬    ┬    ┬    ┬    ┬    ┬
+// │    │    │    │    │    |
+// │    │    │    │    │    └ day of week (0 - 7) (0 or 7 is Sun)
+// │    │    │    │    └───── month (1 - 12)
+// │    │    │    └────────── day of month (1 - 31)
+// │    │    └─────────────── hour (0 - 23)
+// │    └──────────────────── minute (0 - 59)
+// └───────────────────────── second (OPTIONAL)
+
 const User = require('../models/user')
 const schedule = require('node-schedule')
 const sms = require('./twilio')
@@ -19,7 +29,7 @@ module.exports = () => {
       })
     })
   }
-  schedule.scheduleJob('11 21 * * *', function () { // send text to get confirmation
+  schedule.scheduleJob('17 21 * * *', function () { // send text to get confirmation
     console.log('checking to see if they did the pushups')
     User.find({}, function (err, users) {
       if (err) return console.log(err)
