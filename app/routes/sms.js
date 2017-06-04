@@ -22,7 +22,7 @@ let handleSMS = (message) => {
     if (yesResponses.indexOf(messageContent) !== -1) {
       User.completeWorkout(message.From)
     } else if (noResponses.indexOf(messageContent) !== -1) {
-      // ignore message until we write a proper ignore handler
+      console.log('Message received not in the timely hours')
     }
   }
 }
