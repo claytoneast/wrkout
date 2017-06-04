@@ -15,8 +15,8 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 mongoose.Promise = global.Promise
 
-app.use('/users', usersRouter)
-app.use('/sms', smsRouter)
+app.use(usersRouter) // '/users'
+app.use(smsRouter) // '/sms'
 
 app.listen(3000, function () {
   console.log('listening on 3000')
@@ -26,4 +26,4 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'app/views/index.html'))
 })
 
-schedule()
+schedule.scheduleEvents()
