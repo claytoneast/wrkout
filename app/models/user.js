@@ -4,13 +4,8 @@ const Schema = mongoose.Schema
 const userSchema = new Schema({
   phone: { type: Number, required: true, unique: true },
   maxPushups: { type: Number, required: true },
-  confirmationCode: { type: Number, required: true },
-  activeUser: { type: Boolean },
   totalPushups: { type: Number },
   totalWorkouts: { type: Number },
-  invitorId: { type: String },
-  inviteeId: { type: String },
-  inviteCode: { type: String },
   created_at: Date,
   updated_at: Date
 })
@@ -18,6 +13,7 @@ const userSchema = new Schema({
 userSchema.statics.completeWorkout = function (userId) {
   this.where('id', userId).exec()
   .then((user) => {
+    user.maxPushups += 2
     // update the user statics, increment their maxPushups
     return user.save()
   })

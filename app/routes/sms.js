@@ -1,9 +1,8 @@
 
-// const ACCOUNT_SID = process.env.ACCOUNT_SID
-// const AUTH_TOKEN = process.env.AUTH_TOKEN
-// const twilio = require('twilio')(ACCOUNT_SID, AUTH_TOKEN)
+const ACCOUNT_SID = process.env.ACCOUNT_SID
+const AUTH_TOKEN = process.env.AUTH_TOKEN
+const twilio = require('twilio')(ACCOUNT_SID, AUTH_TOKEN)
 const User = require('../models/user')
-
 let express = require('express')
 
 module.exports = function (app) {
@@ -11,24 +10,29 @@ module.exports = function (app) {
   app.use('/sms', router)
 
   router.post('/', function (req, res) {
-    let message = req.body
-    let messageContent = message.Body
-    let yesResponses = ['yes', 'yeah', 'ye', 'yea', 'fuck yeah', 'fuck yea', 'hell yeah', 'hell yea']
-    let noResponses = ['nope', 'no', 'hell no', 'fuck no', 'nah']
-    console.log('=========== messageContent ===========', JSON.stringify(messageContent, null, 4))
-    let timeNow = new Date()
-    let hours = timeNow.getHours()
-    let minutes = timeNow.getMinutes()
-    if (hours === 9 && minutes >= 17 && minutes <= 30) {
-      if (yesResponses.indexOf(messageContent) !== -1) {
-        User.completeWorkout(message.From)
-      } else if (noResponses.indexOf(messageContent) !== -1) {
-        console.log('Message received not in the timely hours')
+    let messageContent = req.body.Body.downcase
+    if (isItTime()) {
+      if (messageContent === 'yes') {
+        User.completeWorkout(req.body.From)
+      } else if (messageContent === 'no') {
+        // handle the lack of try
       }
+    } else {
+      console.log('Message not received in the timely hour, DISREGARDED.')
     }
   })
 }
 
+function isItTime () {
+  if (process.env.NODE_ENV === 'test') {
+    return true
+  } else {
+    let timeNow = new Date()
+    let hours = timeNow.getHours()
+    let minutes = timeNow.getMinutes()
+    return hours === 9 && minutes >= 17 && minutes <= 30
+  }
+}
 // =========== message =========== {
 //     "ToCountry": "US",
 //     "ToState": "CA",

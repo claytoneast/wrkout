@@ -1,0 +1,8 @@
+{
+  "test": {
+    "dbUrl": "mongodb://localhost/wrkoutTest"
+  },
+  "dev": {
+    "dbUrl": "mongodb://localhost/wrkoutDev"
+  }
+}

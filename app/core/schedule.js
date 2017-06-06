@@ -13,7 +13,7 @@ module.exports = {
           for (let user of users) {
             let max = user.maxPushups
             let reps = Math.floor(percentagesOfMax[i] * max)
-            sms.sendSMS(`Bust out ${reps} pushups.`)
+            sms.sendSMS(`Bust out ${reps} pushups.`, user.number)
           }
         })
       })

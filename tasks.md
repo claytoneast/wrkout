@@ -54,7 +54,8 @@ Stories:
 * The user responds with a yes/no completion text  
 
 What are we testing with those?  
-* The schedule function is called upon startup  
-* The node-schedule events are fired  
-* The function is called to send the text messages  
+* DONE The schedule function is called upon startup  
+*
 * A mock network request is received which simulates the yes/no response from the user  
+
+* The node-schedule events are fired, and texts are mock-sent. In dev, the events will fire at 9pm, in test, they'll fire at some time indicated by the config/js file. The send text function will be mocked, or it will use the test credentials.
