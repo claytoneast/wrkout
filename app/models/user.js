@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
+const sendSMS = require('../core/smsClient')
 
 const userSchema = new Schema({
   phone: { type: Number, required: true, unique: true },
@@ -13,12 +14,14 @@ const userSchema = new Schema({
 userSchema.statics.completeWorkout = function (userId) {
   this.where('id', userId).exec()
   .then((user) => {
-    user.maxPushups += 2
-    // update the user statics, increment their maxPushups
+    // updates the user statics, increments their maxPushups
+    user.maxPushups += 1
+    user.totalWorkouts += 1
     return user.save()
   })
   .then((user) => {
-    // send message to the user saying congratulations or wtv
+    let msg = "Way to crush the gnar. We'll have something more for you tomorrow. Stay strong."
+    sendSMS(msg, user.phone)
   })
   .catch((err) => {
     console.log('error ===========>', err)

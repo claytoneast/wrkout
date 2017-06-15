@@ -48,6 +48,8 @@ describe('SMS stuff', () => {
           expect(res.status).to.equal(200)
           done()
         })
+      }).catch((err) => {
+        return console.log('=========== err ===========', JSON.stringify(err, null, 4))
       })
     })
   })
