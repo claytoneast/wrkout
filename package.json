@@ -8,7 +8,8 @@
     "dev": "export NODE_ENV=dev && nodemon app.js",
     "scss": "sass --watch app/assets/styles/styles.scss:app/public/styles.css",
     "debug": "node-debug -b=0 -cli --no-preload app.js",
-    "clean": "mongo wrkoutDev --eval 'db.dropDatabase();'"
+    "clean": "mongo wrkoutDev --eval 'db.dropDatabase();'",
+    "seed": "node db/seed"
   },
   "author": "",
   "license": "ISC",
