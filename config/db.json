@@ -4,5 +4,8 @@
   },
   "dev": {
     "dbUrl": "mongodb://localhost/wrkoutDev"
+  },
+  "staging": {
+    "dbUrl": "mongodb://heroku_sg0t3phh:9js74u8h5mf3ktn9tfjtslko1l@ds127842.mlab.com:27842/heroku_sg0t3phh"
   }
 }
