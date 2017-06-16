@@ -14,7 +14,6 @@ const userSchema = new Schema({
 userSchema.statics.completeWorkout = function (userId) {
   this.where('id', userId).exec()
   .then((user) => {
-    // updates the user statics, increments their maxPushups
     user.maxPushups += 1
     user.totalWorkouts += 1
     return user.save()
@@ -27,16 +26,6 @@ userSchema.statics.completeWorkout = function (userId) {
     console.log('error ===========>', err)
   })
 }
-// function getRandomPonyFooArticle () {
-//   return new Promise((resolve, reject) => {
-//     request('https://ponyfoo.com/articles/random', (err, res, body) => {
-//       if (err) {
-//         reject(err); return;
-//       }
-//       resolve(body);
-//     });
-//   });
-// }
 
 const User = mongoose.model('User', userSchema)
 
